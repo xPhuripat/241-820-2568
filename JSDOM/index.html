@@ -3,23 +3,77 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Mouse Event Demo</title>
 </head>
 <body>
-    <input type="radio" name="gender" value="male" onchange="changeGender()"> male
-    <input type="radio" name="gender" value="female" onchange="changeGender()"> female
+    <!-- ตัวอย่างเดิมที่ใช้ inline event handlers -->
+    <!-- <div
+        onmouseover="OverItem()"
+        onmousedown="DownItem()"
+        onmouseup="UpItem()">
+        Click
+    </div> -->
+
+    <!-- ตัวอย่างการซ่อนข้อความด้วย span -->
+    <!-- <div id="hi">Hi <span style="display:none;">A</span></div> -->
+
+    <!-- รายการงานอดิเรก -->
+    <!-- <ul>
+        <li>อ่านหนังสือ</li>
+        <li>ว่ายน้ำ</li>
+        <li>เล่นเกมส์</li>
+    </ul> -->
+
+    <h1>งานอดิเรก</h1>
+
+    <div id="content"></div>
+
+    งานอดิเรก:    
+    <input type="checkbox" name="hobby" value="reading">อ่านหนังสือ
+    <input type="checkbox" name="hobby" value="swimming">ว่ายน้ำ
+    <input type="checkbox" name="hobby" value="gaming">เล่นเกมส์
+
+    <button onclick="SubmitHobby()">Submit</button>
 
     <script>
-        function changeGender() {
-            //เลือก gender ทุก input ทีออกมา
-            let gendersInput = document.querySelectorAll("input[name='gender']");
+        // ตัวอย่างการเข้าถึง DOM และ innerHTML
+        // let hiDom = document.getElementById("hi");  
+        // hiDom.innerHTML = "Hi <b>B</b>";
 
-            //ใคร checked อยู่ = เพศนโดนเลือกอยู่
-            for(let i=0; i<gendersInput.length; i++) {
-                if(gendersInput[i].checked) {
-                    console.log("Gender Selected: " + gendersInput[i].value);   
-        }
+        // console.log("textContent:", hiDom.textContent);
+        // console.log("innerText:", hiDom.innerText);
+        // console.log("innerHTML:", hiDom.innerHTML);
+
+        // ฟังก์ชัน mouse events
+        // function OverItem() {
+        //     console.log("Mouse Over detected");
+        // }
+        // function DownItem() {
+        //     console.log("Mouse Down detected");
+        // }
+        // function UpItem() {
+        //     console.log("Mouse Up detected");
+        // }
+
+        // ฟังก์ชัน SubmitHobby
+        function SubmitHobby(){
+            // เลือก checkbox ที่มี name = hobby ทั้งหมด
+            let hobbyCheckboxes = document.querySelectorAll('input[name="hobby"]');
+            let contentHtml = '<ul>';
+
+            // เอาค่าที่เลือกออกมา
+            for (let i = 0; i < hobbyCheckboxes.length; i++) {
+                if (hobbyCheckboxes[i].checked) {
+                    contentHtml += '<li>' + hobbyCheckboxes[i].value + '</li>';
+                }
             }
+            
+            //วนค่าที่เลือกมาแสดงในรูปแบบ ul  li
+            contentHtml += '</ul>';
+
+            //ใส่ html ลงใน div id="content"
+            let contentDiv = document.getElementById("content");
+            contentDiv.innerHTML = contentHtml;
         }
     </script>
 </body>
